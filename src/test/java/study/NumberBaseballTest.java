@@ -83,4 +83,70 @@ public class NumberBaseballTest {
         assertThatThrownBy(scanner::nextInt)
             .isInstanceOf(InputMismatchException.class);
     }
+
+    @ParameterizedTest
+    @DisplayName("입력 받은 숫자의 판별")
+    @CsvSource(value = {"123 123:0 3", "351 351:0 3", "241 235:0 1", "632 241:1 0"}, delimiter = ':')
+    void judgeInputNumber(String number, String judge) {
+        // given
+        String[] numberSplit = number.split(" ");
+        String[] judgeSplit = judge.split(" ");
+
+        String answer = numberSplit[0];
+        Scanner scanner = new Scanner(numberSplit[1]);
+        int numbers = scanner.nextInt();
+        String inputNumber = String.valueOf(numbers);
+
+        int strike = 0;
+        int ball = 0;
+
+        // when
+        int firstAnswerNumber = answer.charAt(0);
+        int secondAnswerNumber = answer.charAt(1);
+        int thirdAnswerNumber = answer.charAt(2);
+
+        int firstInputNumber = inputNumber.charAt(0);
+        int secondInputNumber = inputNumber.charAt(1);
+        int thirdInputNumber = inputNumber.charAt(2);
+
+        if (firstInputNumber == firstAnswerNumber) {
+            strike++;
+        }
+
+        if (firstInputNumber == secondAnswerNumber) {
+            ball++;
+        }
+
+        if (firstInputNumber == thirdAnswerNumber) {
+            ball++;
+        }
+
+        if (secondInputNumber == firstAnswerNumber) {
+            ball++;
+        }
+
+        if (secondInputNumber == secondAnswerNumber) {
+            strike++;
+        }
+
+        if (secondInputNumber == thirdAnswerNumber) {
+            ball++;
+        }
+
+        if (thirdInputNumber == firstAnswerNumber) {
+            ball++;
+        }
+
+        if (thirdInputNumber == secondAnswerNumber) {
+            ball++;
+        }
+
+        if (thirdInputNumber == thirdAnswerNumber) {
+            strike++;
+        }
+
+        //then
+        assertThat(ball).isEqualTo(Integer.parseInt(judgeSplit[0]));
+        assertThat(strike).isEqualTo(Integer.parseInt(judgeSplit[1]));
+    }
 }
