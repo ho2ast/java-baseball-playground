@@ -24,4 +24,12 @@ public class StringTest {
         String[] splitActual = actual.split(",");
         assertThat(splitActual).containsExactly("1");
     }
+
+    @Test
+    void substring() {
+        String actual = "(1,2)";
+        String substring = actual.substring(1, 4);
+        assertThat(substring).isEqualTo("1,2");
+    }
+
 }
