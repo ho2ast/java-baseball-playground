@@ -173,4 +173,21 @@ public class NumberBaseballTest {
         //then
         assertThat(sb.toString().trim()).isEqualTo("3 스트라이크");
     }
+
+    @Test
+    void endGame() {
+        // given
+        int input = 1;
+        Scanner scanner = new Scanner("2");
+        input = scanner.nextInt();
+        boolean isDone = false;
+
+        // when
+        if (input == 2) {
+            isDone = true;
+        }
+
+        //then
+        assertThat(isDone).isTrue();
+    }
 }
